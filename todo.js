@@ -10,9 +10,9 @@
 
         function addtask() {
             let item = document.getElementById("input").value;
-            let lst = document.createElement("lst");
+            let li = document.createElement("li");
             let text = document.createTextNode(item);
-            lst.appendChild(text);
+            li.appendChild(text);
             let ul = document.getElementById('list');
-            ul.appendChild(lst);
+            ul.appendChild(li);
         }
