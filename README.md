@@ -1,1 +1,1 @@
-This is a simple ToDoApp with JS
+This is my ToDoApp with MVC pattern .

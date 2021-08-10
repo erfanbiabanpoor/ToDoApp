@@ -1,6 +1,6 @@
 *{
     box-sizing: border-box;
-    margin: 10px;
+    margin: 5px;
 }
 body{
     background-color: rgb(250, 145, 59);
@@ -12,4 +12,10 @@ body{
     justify-content: center;
     align-items: center;
     color: rgb(20, 118, 230);
+}
+.btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
