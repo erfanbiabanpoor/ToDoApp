@@ -9,13 +9,21 @@
 <body>
     <h1> To Do App </h1>
     <div class="input"><input type="text" id="input"></div>
+    <button type="button" id="add" onclick="" >Add a task</button> 
     <div class="btn">
-        <button type="button" id="add" onclick="" >Add a task</button> 
-        <button type="button" id="remove" onclick="" >Delete</button> 
+        <button type="button" id="remove" onclick="" >Delete</button>
+        <button type="button" id="edit" onclick="" >Edit</button>  
         <button type="button" id="done" onclick="" >Done ! </button> 
+    
     </div>
-    <ol type="1" id="list">
-    </ol>
+    <label for="cars">Todo status:</label>
+
+<select class="todos">
+  <option value="All">All</option>
+  <option value="Active">Active</option>
+  <option value="Completed">Completed</option>
+</select>
+    <ol id="list"> </ol>
     <script src="todo.js"></script>
     <link rel="stylesheet" href="style.css" /></body>
 </html>
