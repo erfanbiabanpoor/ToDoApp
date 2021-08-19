@@ -1,6 +1,11 @@
 class Model{
     constructor() {
         this.toDoList = [];
-        this.status = "all";
+
+    }
+    addTodo(value){
+        this.toDoList.push(value);
+        console.log(this.toDoList);
     }
 }
+export default Model;
