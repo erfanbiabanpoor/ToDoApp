@@ -16,9 +16,15 @@ class View{
         const value = this.inputValue.value;
         this.inputValue.value = "";
         this.callBack(value);
-        
+
     }); 
    }
+    delTodo(){
+        this.delete.addEventListener("click",(e)=>{
+            e.preventDefault();
+            
+        })
+    }
     eventListener (callBack){
         this.callBack = callBack;
     }
