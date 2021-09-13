@@ -3,6 +3,7 @@ class Model{
         this.toDoList = [];
 
     }
+
     addTodo(value){
         this.toDoList.push(value);
     }
