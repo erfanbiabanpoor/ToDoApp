@@ -10,7 +10,13 @@
     <h1> To Do App </h1>
     <div class="input"><input type="text" id="input"></div>
     <button type="button" id="button" onclick="check()" >Click Here</button> 
-    <ol type="1" id="list">
+    <select class="filter" onchange="filterTask()">
+        <option class="default">filter</option>
+        <option class="all">All</option>
+        <option class="active">Active</option>
+        <option class="completed">Completed</option>
+    </select>
+    <ol id="list">
     </ol>
     <script src="todo.js"></script>
     <link rel="stylesheet" href="style.css" /></body>
