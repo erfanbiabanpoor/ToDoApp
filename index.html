@@ -8,8 +8,9 @@
 </head>
 <body>
     <h1> To Do App </h1>
-    <div class="input"><input type="text" id="input"></div>
-    <button type="button" id="button" onclick="check()" >Click Here</button> 
+    <div class="main">
+        <input type="text" id="input">
+    <button type="button" id="button" onclick="addTask()" >Click Here</button> 
     <select class="filter" onchange="filterTask()">
         <option class="default">filter</option>
         <option class="all">All</option>
@@ -18,6 +19,7 @@
     </select>
     <ol id="list">
     </ol>
+    </div>
     <script src="todo.js"></script>
     <link rel="stylesheet" href="style.css" /></body>
 </html>
