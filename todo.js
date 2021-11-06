@@ -15,7 +15,7 @@ function addtask() {
   ul.appendChild(li);
 }
 function renderPage() {
-  const TodoList = document.querySelector(".todo-list");
+  const TodoList = document.getElementById(".list");
   TodoList.innerHTML = "";
   const filteredDataBase = taskDataBase.filter((task) => {
     let status;
@@ -104,7 +104,7 @@ function completeTask(event) {
 renderPage();
 
 function filterTask() {
-  const filterElement = document.getElementsByClassName("filter")[0];
+  const filterElement = document.getElementsByClassName("default")[0];
   const filterELChild = filterElement.value.toLowerCase();
   let status;
   status = filterELChild;
