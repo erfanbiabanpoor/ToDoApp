@@ -1,95 +1,65 @@
-let newTask = document.querySelector("#new-task");
-let addTaskBtn = document.querySelector("#addTask");
-let toDoUl = document.querySelector(".todo-list ul");
-let completeUl = document.querySelector(".complete-list ul");
-
-let createNewTask = function (task) {
-
-  let listItem = document.createElement("li"); 
+let taskInput = document.getElementById("new-task");
+let addButton = document.getElementsByTagName("button")[0];
+let todoList = document.querySelector("ul");
+let createNewTaskElement = function (taskString) {
+  let listItem = document.createElement("li");
   let checkBox = document.createElement("input");
-  let label = document.createElement("label"); 
-
-  //PULL THE INPUTED TEXT INTO LABEL
-  label.innerText = task;
-
-  //ADD PROPERTIES
+  let label = document.createElement("label");
+  let editInput = document.createElement("input");
+  let editButton = document.createElement("button");
+  let deleteButton = document.createElement("button");
+  label.innerText = taskString;
   checkBox.type = "checkbox";
-
-  //ADD ITEMS TO THE LI
+  editInput.type = "text";
+  editButton.innerText = "Edit";
+  editButton.className = "edit";
+  deleteButton.innerText = "Delete";
+  deleteButton.className = "delete";
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
-  //EVERYTHING PUT TOGETHER
+  listItem.appendChild(editInput);
+  listItem.appendChild(editButton);
+  listItem.appendChild(deleteButton);
   return listItem;
 };
-
 let addTask = function () {
-  let listItem = createNewTask(newTask.value);
-  //ADD THE NEW LIST ITEM TO LIST
-  toDoUl.appendChild(listItem);
-  //CLEAR THE INPUT
-  newTask.value = "";
-
-  //BIND THE NEW LIST ITEM TO THE INCOMPLETE LIST
-  bindIncompleteItems(listItem, completeTask);
+  let listItem = createNewTaskElement(taskInput.value);
+  todoList.appendChild(listItem);
+  bindTaskEvents(listItem, taskCompleted);
 };
-
-let completeTask = function () {
-  //GRAB THE CHECKBOX'S PARENT ELEMENT, THE LI IT'S IN
+let editTask = function () {
   let listItem = this.parentNode;
-
-  //CREATE AND INSERT THE DELETE BUTTON
-  let deleteBtn = document.createElement("button"); // <button>
-  deleteBtn.innerText = "Delete";
-  deleteBtn.className = "delete";
-  listItem.appendChild(deleteBtn);
-
-  //SELECT THE CHECKBOX FROM THE COMPLETED CHECKBOX AND REMOVE IT
-  let checkBox = listItem.querySelector("input[type=checkbox]");
-  checkBox.remove();
-
-  //PLACE IT INSIDE THE COMPLETED LIST
-  completeUl.appendChild(listItem);
-
-  //BIND THE NEW COMPLETED LIST
-  bindCompleteItems(listItem, deleteTask);
+  let editInput = listItem.querySelector("input[type=text]");
+  let label = listItem.querySelector("label");
+  let containsClass = listItem.classList.contains("editMode");
+  if (containsClass) {
+    label.innerText = editInput.value;
+  } else {
+    editInput.value = label.innerText;
+  }
+  listItem.classList.toggle("editMode");
 };
-
-//DELETE TASK FUNCTIONS
 let deleteTask = function () {
-
   let listItem = this.parentNode;
   let ul = listItem.parentNode;
-
   ul.removeChild(listItem);
 };
-
-//A FUNCTION THAT BINDS EACH OF THE ELEMENTS THE INCOMPLETE LIST
-
-let bindIncompleteItems = function (taskItem, checkBoxClick) {
-
-  //BIND THE CHECKBOX TO A VAR
-  let checkBox = taskItem.querySelector("input[type=checkbox]");
-
-  //SETUP EVENT LISTENER FOR THE CHECKBOX
-  checkBox.onchange = checkBoxClick;
+let taskCompleted = function () {
+  let listItem = this.parentNode;
+  bindTaskEvents(listItem);
 };
-
-//A FUNCTIONM THAT BINDS EACH OF THE ELEMTS IN THE COMPLETE LIST
-let bindCompleteItems = function (taskItem, deleteButtonPress) {
-
-  //BIND THE DELETE BUTTON
-  let deleteButton = taskItem.querySelector(".delete");
-
-  //WHEN THE DELETE BUTTIN IS PRESSED, RUN THE deleteTask function
-  deleteButton.onclick = deleteButtonPress;
+let taskIncomplete = function () {
+  let listItem = this.parentNode;
+  bindTaskEvents(listItem);
 };
-
-for (let i = 0; i < toDoUl.children.length; i++) {
-  bindIncompleteItems(toDoUl.children[i], completeTask);
-}
-
-for (let i = 0; i < completeUl.children.length; i++) {
-  bindCompleteItems(completeUl.children[i], deleteTask);
-}
-
-addTaskBtn.addEventListener("click", addTask);
+let ajaxRequest = function () {};
+addButton.addEventListener("click", addTask);
+addButton.addEventListener("click", ajaxRequest);
+let bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
+  let checkBox = taskListItem.querySelector("input[type=checkbox]");
+  let editButton = taskListItem.querySelector("button.edit");
+  let deleteButton = taskListItem.querySelector("button.delete");
+  editButton.onclick = editTask;
+  deleteButton.onclick = deleteTask;
+  checkBox.onchange = checkBoxEventHandler;
+};

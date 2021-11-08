@@ -1,42 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
 </head>
+
 <body>
     <div class="container">
-    
-        <h1>To-Do App</h1>
-    
-        <div class="new-task-container box">
-    
-            <label for="new-task">Add New Task</label>
-            <input type="text" id="new-task">
-            <button id="addTask">Add Task</button>
-    
-        </div>
-    
-        <div class="todo-list box">
-    
-            <h2>Incomplete Tasks</h2>
-            <ul>
+        <p class="main">
+            <label for="new-task">Add Item</label><input id="new-task" type="text"><button>Add</button>
+        </p>
 
-            </ul>
-    
-        </div>
-    
-        <div class="complete-list box">
-    
-            <h2>Completed Tasks</h2>
-
-    
-        </div>
-    
     </div>
-    <script src="todo.js"></script>
+   <ul></ul>
+    <script type="text/javascript" src="app.js"></script>
+
 </body>
+
 </html>
