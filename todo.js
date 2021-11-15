@@ -1,12 +1,11 @@
 const todoInput = document.querySelector(".input");
 const todoButton = document.querySelector(".add");
 const todoList = document.querySelector(".todo-list");
-const filterOption = document.querySelector(".filter");
+const filterOption = document.querySelector(".filter-todo");
 
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
 filterOption.addEventListener("click", filterTodo);
-
 function addTodo(e) {
   e.preventDefault();
   const todoDiv = document.createElement("div");
@@ -25,8 +24,15 @@ function addTodo(e) {
   deleteBtn.classList.add("delete-btn");
   todoDiv.appendChild(deleteBtn);
   todoList.appendChild(todoDiv);
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML = "edit";
+  editBtn.classList.add("edit-btn");
+  todoDiv.appendChild(editBtn);
+  todoList.appendChild(todoDiv);
+  editBtn.onclick = function () {
+    editTodo(newTodo);
+  };
   todoInput.value = "";
-  // newTodo.addEventListener("click", deleteItem);
 }
 function deleteCheck(e) {
   const item = e.target;
@@ -52,6 +58,19 @@ function filterTodo(e) {
         } else {
           todo.style.display = "none";
         }
+        break;
+      case "active":
+        if (!todo.classList.contains("completed")) {
+          todo.style.display = "flex";
+          console.log(todo);
+        } else {
+          todo.style.display = "none";
+        }
+        break;
     }
   });
+}
+function editTodo(e) {
+  const editValue = prompt("edit the select item", e.firstChild.nodeValue);
+  e.firstChild.nodeValue = editValue;
 }

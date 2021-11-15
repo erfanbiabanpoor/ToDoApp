@@ -28,6 +28,10 @@ form button {
   color: orange;
   cursor: pointer;
 }
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
 .todo-container {
   display: flex;
   justify-content: center;
@@ -49,7 +53,8 @@ form button {
   flex: 1;
 }
 .delete-btn,
-.complete-btn {
+.complete-btn,
+.edit-btn {
   background: coral;
   color: white;
   border: none;
@@ -60,14 +65,13 @@ form button {
 .complete-btn {
   background-color: green;
 }
+.edit-btn {
+  background-color: purple;
+}
 .todo-item {
   padding: 0rem 0.5rem;
 }
 
-.completed {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
 select {
   margin: 1rem;
   position: relative;
@@ -76,5 +80,4 @@ select {
   width: 10rem;
   cursor: pointer;
   padding: 1rem;
-  
 }
