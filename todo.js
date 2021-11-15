@@ -1,65 +1,57 @@
-let taskInput = document.getElementById("new-task");
-let addButton = document.getElementsByTagName("button")[0];
-let todoList = document.querySelector("ul");
-let createNewTaskElement = function (taskString) {
-  let listItem = document.createElement("li");
-  let checkBox = document.createElement("input");
-  let label = document.createElement("label");
-  let editInput = document.createElement("input");
-  let editButton = document.createElement("button");
-  let deleteButton = document.createElement("button");
-  label.innerText = taskString;
-  checkBox.type = "checkbox";
-  editInput.type = "text";
-  editButton.innerText = "Edit";
-  editButton.className = "edit";
-  deleteButton.innerText = "Delete";
-  deleteButton.className = "delete";
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
-  return listItem;
-};
-let addTask = function () {
-  let listItem = createNewTaskElement(taskInput.value);
-  todoList.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
-};
-let editTask = function () {
-  let listItem = this.parentNode;
-  let editInput = listItem.querySelector("input[type=text]");
-  let label = listItem.querySelector("label");
-  let containsClass = listItem.classList.contains("editMode");
-  if (containsClass) {
-    label.innerText = editInput.value;
-  } else {
-    editInput.value = label.innerText;
+const todoInput = document.querySelector(".input");
+const todoButton = document.querySelector(".add");
+const todoList = document.querySelector(".todo-list");
+const filterOption = document.querySelector(".filter");
+
+todoButton.addEventListener("click", addTodo);
+todoList.addEventListener("click", deleteCheck);
+filterOption.addEventListener("click", filterTodo);
+
+function addTodo(e) {
+  e.preventDefault();
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo");
+  const newTodo = document.createElement("li");
+  newTodo.innerText = todoInput.value;
+  newTodo.classList.add("todo-item");
+  todoDiv.appendChild(newTodo);
+  const completeBtn = document.createElement("button");
+  completeBtn.innerHTML = "complete";
+  completeBtn.classList.add("complete-btn");
+  todoDiv.appendChild(completeBtn);
+  todoList.appendChild(todoDiv);
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = "delete";
+  deleteBtn.classList.add("delete-btn");
+  todoDiv.appendChild(deleteBtn);
+  todoList.appendChild(todoDiv);
+  todoInput.value = "";
+  // newTodo.addEventListener("click", deleteItem);
+}
+function deleteCheck(e) {
+  const item = e.target;
+  if (item.classList[0] === "delete-btn") {
+    const todo = item.parentElement;
+    todo.remove();
   }
-  listItem.classList.toggle("editMode");
-};
-let deleteTask = function () {
-  let listItem = this.parentNode;
-  let ul = listItem.parentNode;
-  ul.removeChild(listItem);
-};
-let taskCompleted = function () {
-  let listItem = this.parentNode;
-  bindTaskEvents(listItem);
-};
-let taskIncomplete = function () {
-  let listItem = this.parentNode;
-  bindTaskEvents(listItem);
-};
-let ajaxRequest = function () {};
-addButton.addEventListener("click", addTask);
-addButton.addEventListener("click", ajaxRequest);
-let bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
-  let checkBox = taskListItem.querySelector("input[type=checkbox]");
-  let editButton = taskListItem.querySelector("button.edit");
-  let deleteButton = taskListItem.querySelector("button.delete");
-  editButton.onclick = editTask;
-  deleteButton.onclick = deleteTask;
-  checkBox.onchange = checkBoxEventHandler;
-};
+  if (item.classList[0] === "complete-btn") {
+    const todo = item.parentElement;
+    todo.classList.toggle("completed");
+  }
+}
+function filterTodo(e) {
+  const todos = todoList.childNodes;
+  todos.forEach(function (todo) {
+    switch (e.target.value) {
+      case "all":
+        todo.style.display = "flex";
+        break;
+      case "completed":
+        if (todo.classList.contains("completed")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+    }
+  });
+}
