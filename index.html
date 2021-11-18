@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ToDo List</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+
+    <link href="https://unpkg.com/ionicons@4.5.10-1/dist/css/ionicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>ToDo List</h1>
+    <div id="todo" class="todo">
+        <input id="add-item" class="input-todo" type="text" name="text" placeholder="Input Your Task" >
+        <button onclick="view.addItem(event)" class="add-todo" >Add</button>
+            <div class="select">
+                <div class="all" onclick="view.filterItem('all')">All</div>
+                <div class="completed" onclick="view.filterItem('completed')">Completed</div>
+                <div class="active" onclick="view.filterItem('active')">Active</div>
+            </div>
+
+    </div>
+    <ul id="list">
+
+    </ul>
+
+
+    <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
